@@ -1,0 +1,58 @@
+---
+title: "ggplot2 course optional homework"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Tidy Tuesday
+
+Try your hand at visualizing this week's Tidy Tuesday [data](https://github.com/rfordatascience/tidytuesday/tree/master/data/2020). (Look for the folder named for today's date.) You should aim to make at least 3 visualizations: 
+
+1. A one-variable viz
+2. A two-variable viz
+3. A three or more variable viz
+
+Email me your favorite and I will put them in the slides at the beginning of day 2. (tyner.samantha@bls.gov)
+
+## Load packages & Read in the data 
+
+```{r getdata}
+library(ggplot2)
+library(readr)
+library(dplyr)
+# or 
+# library(tidyverse)
+
+# put the name of the file where {filename} is 
+gdpr <- read_tsv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-04-21/gdpr_violations.tsv')
+```
+
+## Use code chunks to make plots 
+
+```{r plot1}
+# chris nolte
+ggplot(dat, aes(x=name)) +
+  geom_histogram(stat='count') +
+  labs(x='Country', y='Number of Violations') +
+  theme(axis.text.x=element_text(angle=90, hjust=1))
+
+dat %>% 
+  group_by(name) %>% 
+  count() %>% 
+  ggplot(aes(x=reorder(name,-n), y = n)) +
+  geom_col() +
+  labs(x='Country', y='Number of Violations') +
+  theme(axis.text.x=element_text(angle=90, hjust=1))
+```
+
+
+```{r plot2}
+# your code here (two variable viz)
+```
+
+```{r plot3}
+# your code here (three+ variable viz) 
+```
